@@ -2,8 +2,14 @@
 
 include "util.php";
 
-printTitle();
-
-printBody();
-
+/* echo "<html> ... <title>" */
+echo printTitle();
+/* echo "</title> ... </head> 
+ *
+ * <body>
+ */
+echo printBody();
+/* echo "</body>
+ * </html>"; 
+ */
 ?>

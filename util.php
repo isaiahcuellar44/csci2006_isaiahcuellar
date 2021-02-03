@@ -2,7 +2,10 @@
 
 
 function printTitle(){
-  echo "<!DOCTYPE html>".
+    return 'Lebrun - Self-portrait in a Straw Hat';
+
+
+    echo "<!DOCTYPE html>".
           "<html lang=\"en\">".
             "<head>".
               "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">".
@@ -12,15 +15,57 @@ function printTitle(){
 }
 
 function printBody(){
-  echo '<body>
+    $firstNav = array('My Account','Wish List', 'Shopping Cart');
+    $navStr = '<ul>';
+    foreach ($firstName as $linkInfo) {
+        $navStr .= '<li><a href="#">'.$linkInfo.'</a></li>';
+    }
+    $navStr .= '</ul>';
+
+    $relatedArt = array(
+        /* Simple Approach: artId => ArtworkName 
+         * Complex Approach: artID => array-of-data
+         */
+        293 => array(
+            'name'  =>'Still Life with Flowers in a Glass Vase'
+            'artist'=>'Lebrun',
+        ),
+        183 => array(
+            'name'=>'Portrait of Alida Christina Assink'
+            'artist'=>'...',
+        ),
+        820 => array(
+            'name'=>'Self-portrait'
+            'artist'=>'van Gogh',
+        ),
+        /* 2 more ... */
+    );
+    $relatedArtwork = '';
+    foreach ($relatedArt as $artID => $artInfo) {
+        /* 
+              <div class="relatedArt">
+                  <figure><img src="artwork/small/849.jpg" alt="Milkmaid" title="Milkmaid">
+                      <figcaption>
+                          <p><a href="#849">Milkmaid</a></p>
+                      </figcaption>
+                  </figure>
+                  <div class="actions"><a href="#">View</a><a href="#">Wish</a><a href="#">Cart</a></div>
+              </div>
+        */
+        $relatedArtwork .= '<div class="relatedArt">'.
+            '<figure><img src="artwork/small/'.$artID.'.jpg" alt="'.$artInfo['name'].'" title="'.$artInfo['name'].'">'.
+            '<figcaption>'.
+            '<p><a href="#'.$artID.'">'.$artInfo['name'].'</a></p>'.
+            '</figcaption>'.
+            '</figure>'.
+            '<div class="actions"><a href="#">View</a><a href="#">Wish</a><a href="#">Cart</a></div>'.
+            '</div>';
+    }
+
+    
+    return '
         <header>
-          <nav class="user">
-              <ul>
-                  <li><a href=\"#\">My Account</a></li>
-                  <li><a href=\"#\">Wish List</a></li>
-                  <li><a href=\"#\">Shopping Cart</a></li>
-              </ul>
-          </nav>
+          <nav class="user">'.$navStr.'</nav>
           <h1>Art Store</h1>
           <nav>
               <ul>
@@ -120,11 +165,7 @@ function printBody(){
       <footer>
           <p>All images are copyright to their owners. This is just a hypothetical site ©2020 Copyright Art Store</p>
       </footer>
-
-  </body>
-
-  </html>';
-
+    ';
 }
 
 ?>

@@ -1,10 +1,9 @@
 <?php
 
+include "account.php";
 
 function printTitle(){
     return 'Lebrun - Self-portrait in a Straw Hat';
-
-
     echo "<!DOCTYPE html>".
           "<html lang=\"en\">".
             "<head>".
@@ -18,12 +17,12 @@ function printBody(){
     $firstNav = array('My Account','Wish List', 'Shopping Cart');
     $navStr = '<ul>';
     foreach ($firstName as $linkInfo) {
-        $navStr .= '<li><a href="#">'.$linkInfo.'</a></li>';
+        $navStr .= '<li><a href="#">'.$linkInfo.'</a></li>'; //I know we need to add the url link to the account portion here but how when its in a array liek this? Do i just modify that single one by calling $firstNav[0] and modifying the html like that?
     }
     $navStr .= '</ul>';
 
     $relatedArt = array(
-        /* Simple Approach: artId => ArtworkName 
+        /* Simple Approach: artId => ArtworkName
          * Complex Approach: artID => array-of-data
          */
         293 => array(
@@ -38,11 +37,18 @@ function printBody(){
             'name'=>'Self-portrait'
             'artist'=>'van Gogh',
         ),
-        /* 2 more ... */
+        374 => array (
+          'name'=>'William II, Prince of Orange, and his Bride, Mary Stuart'
+          'artist'=>'...',
+        ),
+        849 => array(
+          'name'=>'Milkmaid'
+          'artist'=>'...',
+        )
     );
     $relatedArtwork = '';
     foreach ($relatedArt as $artID => $artInfo) {
-        /* 
+        /*
               <div class="relatedArt">
                   <figure><img src="artwork/small/849.jpg" alt="Milkmaid" title="Milkmaid">
                       <figcaption>
@@ -62,7 +68,7 @@ function printBody(){
             '</div>';
     }
 
-    
+
     return '
         <header>
           <nav class="user">'.$navStr.'</nav>
@@ -120,46 +126,7 @@ function printBody(){
           </article>
           <h2>Similar Artwork</h2>
           <article class="related">
-              <div class="relatedArt">
-                  <figure><img src="artwork/small/293.jpg" alt="Still Life with Flowers in a Glass Vase" title="Still Life with Flowers in a Glass Vase">
-                      <figcaption>
-                          <p><a href="#293">Still Life with Flowers in a Glass Vase</a></p>
-                      </figcaption>
-                  </figure>
-                  <div class="actions"><a href="#">View</a><a href="#">Wish</a><a href="#">Cart</a></div>
-              </div>
-              <div class="relatedArt">
-                  <figure><img src="artwork/small/183.jpg" alt="Portrait of Alida Christina Assink" title="Portrait of Alida Christina Assink">
-                      <figcaption>
-                          <p><a href="#183">Portrait of Alida Christina Assink</a></p>
-                      </figcaption>
-                  </figure>
-                  <div class="actions"><a href="#">View</a><a href="#">Wish</a><a href="#">Cart</a></div>
-              </div>
-              <div class="relatedArt">
-                  <figure><img src="artwork/small/820.jpg" alt="Self-portrait" title="Self-portrait">
-                      <figcaption>
-                          <p><a href="#820">Self-portrait</a></p>
-                      </figcaption>
-                  </figure>
-                  <div class="actions"><a href="#">View</a><a href="#">Wish</a><a href="#">Cart</a></div>
-              </div>
-              <div class="relatedArt">
-                  <figure><img src="artwork/small/374.jpg" alt="William II, Prince of Orange, and his Bride, Mary Stuart" title="William II, Prince of Orange, and his Bride, Mary Stuart">
-                      <figcaption>
-                          <p><a href="#374">William II, Prince of Orange, and his Bride, Mary Stuart</a></p>
-                      </figcaption>
-                  </figure>
-                  <div class="actions"><a href="#">View</a><a href="#">Wish</a><a href="#">Cart</a></div>
-              </div>
-              <div class="relatedArt">
-                  <figure><img src="artwork/small/849.jpg" alt="Milkmaid" title="Milkmaid">
-                      <figcaption>
-                          <p><a href="#849">Milkmaid</a></p>
-                      </figcaption>
-                  </figure>
-                  <div class="actions"><a href="#">View</a><a href="#">Wish</a><a href="#">Cart</a></div>
-              </div>
+              <div class="relatedArt">'.$relatedArtwork.'</div>
           </article>
       </main>
       <footer>

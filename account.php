@@ -2,11 +2,11 @@
 <?php
 
 //How do i check if anything else was submitted?
-function buildingAForm($method){
-  $action = ($method)? "GET" : "POST";
+function accountDetails(){
 
-  echo <<<__HTML__
-                  <form method="{$action}" action="artwork.php?action={$action}">
+
+  return <<<__HTML__
+                  <form method="POST" action="">
                     <label for="name">Name: </label>
                     <input type="text" name="fName" placeholder="Name"><br>
 

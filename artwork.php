@@ -1,48 +1,69 @@
 <?php
 
-include "account.php";
+include_once "account.php";
+
+function printFooter(){
+  return '<footer>
+            <p>All images are copyright to their owners. This is just a hypothetical site ©2020 Copyright Art Store</p>
+          </footer>';
+};
+
+function printHeader(){
+  $firstNav = array(
+    array ('name' => 'My account', 'link' => "?pg=account"),
+    array ('name' => 'Wish List', 'link' => "#"),
+    array ('name' => 'Shopping Cart', 'link' => "#"),
+  );
+
+  $navStr = '<ul>';
+  foreach ($firstNav as $linkInfo) {
+      $navStr .= '<li><a href="'.$linkInfo['link'].'">'.$linkInfo['name'].'</a></li>';
+  }
+  $navStr .= '</ul>';
+
+  return '<header>
+            <nav class="user">'.$navStr.'</nav>
+            <h1>Art Store</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Art Works</a></li>
+                    <li><a href="#">Artists</a></li>
+                </ul>
+            </nav>
+        </header>';
+}
 
 function printTitle(){
     return 'Lebrun - Self-portrait in a Straw Hat';
-    echo "<!DOCTYPE html>".
-          "<html lang=\"en\">".
-            "<head>".
-              "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">".
-              "<title>Lebrun - Self-portrait in a Straw Hat</title>".
-              "<link rel=\"stylesheet\" href=\"aux/default.css\">".
-            "</head>";
 }
 
 function printBody(){
-    $firstNav = array('My Account','Wish List', 'Shopping Cart');
-    $navStr = '<ul>';
-    foreach ($firstName as $linkInfo) {
-        $navStr .= '<li><a href="#">'.$linkInfo.'</a></li>'; //I know we need to add the url link to the account portion here but how when its in a array liek this? Do i just modify that single one by calling $firstNav[0] and modifying the html like that?
-    }
-    $navStr .= '</ul>';
+
 
     $relatedArt = array(
         /* Simple Approach: artId => ArtworkName
          * Complex Approach: artID => array-of-data
          */
         293 => array(
-            'name'  =>'Still Life with Flowers in a Glass Vase'
+            'name'  =>'Still Life with Flowers in a Glass Vase',
             'artist'=>'Lebrun',
         ),
         183 => array(
-            'name'=>'Portrait of Alida Christina Assink'
+            'name'=>'Portrait of Alida Christina Assink',
             'artist'=>'...',
         ),
         820 => array(
-            'name'=>'Self-portrait'
+            'name'=>'Self-portrait',
             'artist'=>'van Gogh',
         ),
         374 => array (
-          'name'=>'William II, Prince of Orange, and his Bride, Mary Stuart'
+          'name'=>'William II, Prince of Orange, and his Bride, Mary Stuart',
           'artist'=>'...',
         ),
         849 => array(
-          'name'=>'Milkmaid'
+          'name'=>'Milkmaid',
           'artist'=>'...',
         )
     );
@@ -70,18 +91,7 @@ function printBody(){
 
 
     return '
-        <header>
-          <nav class="user">'.$navStr.'</nav>
-          <h1>Art Store</h1>
-          <nav>
-              <ul>
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Art Works</a></li>
-                  <li><a href="#">Artists</a></li>
-              </ul>
-          </nav>
-      </header>
+
       <main>
           <article class="artwork">
               <h2 class="art_title">Self-portrait in a Straw Hat</h2>
@@ -128,11 +138,7 @@ function printBody(){
           <article class="related">
               <div class="relatedArt">'.$relatedArtwork.'</div>
           </article>
-      </main>
-      <footer>
-          <p>All images are copyright to their owners. This is just a hypothetical site ©2020 Copyright Art Store</p>
-      </footer>
-    ';
+      </main>';
 }
 
 ?>

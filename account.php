@@ -3,8 +3,6 @@
 
 //How do i check if anything else was submitted?
 function accountDetails(){
-
-
   return <<<__HTML__
                   <form method="POST" action="">
                     <label for="name">Name: </label>

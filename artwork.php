@@ -14,6 +14,8 @@ function printHeader(){
     array ('name' => 'My account', 'link' => "?pg=account"),
     array ('name' => 'Wish List', 'link' => "#"),
     array ('name' => 'Shopping Cart', 'link' => "#"),
+    array ('name' => 'Returns?', 'link' => "?pg=returns"),
+    array ('name' => 'Premium', 'link' => "?pg=premium")
   );
 
   $navStr = '<ul>';

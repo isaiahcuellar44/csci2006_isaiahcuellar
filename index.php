@@ -16,10 +16,16 @@ switch ($_GET["pg"]){
   case "account":
     $body = accountDetails();
     break;
+  case "returns":
+    $body = returns();
+    break;
+  case "premium":
+    $body = premium();
+    break;
   case "artworks":
     //See if the query string has an artwork ID
-    $artworkID = 5;
-    $test = new Artwork($artworkID);
+    $artworkID = 1;
+    $artwork1 = new Artwork($artworkID);
     $title = $test->getTitle();//This does the HTML conversion
     $body = $test->getBody();
     break;
@@ -35,13 +41,16 @@ switch ($_GET["pg"]){
     default:
     case "artists":
       //See if the query string has an artwork ID
-      $artistID = 1000000;
-      $test = new Artist($artistID);
+      $artistID = 1;
+      $artist1 = new Artist($artistID);
       $title = $test->getTitle();//This does the HTML conversion
       $body = $test->getBody();
       break;
 }
 
+
+
+//Im also sure here we need a for each loop to go through each artwork amongst artists
 
 
  echo "<!DOCTYPE html>".

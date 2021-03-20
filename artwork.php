@@ -5,7 +5,7 @@ include_once "account.php";
 
 function printFooter(){
   return '<footer>
-            <p>All images are copyright to their owners. This is just a hypothetical site ©2020 Copyright Art Store</p>
+            <p>All images are copyright to their owners. This is just a hypothetical site ©2020 Copyright</p>
           </footer>';
 };
 

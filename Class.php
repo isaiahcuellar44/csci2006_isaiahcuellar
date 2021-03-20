@@ -11,42 +11,95 @@ class Artist extends data{
     $this->query($id);
   }
   function getTitle(){
-    return $this->values["name"];
+    return $this->values["artist_fullName"];
   }
 
   function getBody(){//I will take most of the artwork HTML
-    return "<div><p>".$this->values['info']."</p></div>";
+    return "<div><p>".$this->values['artist_desc']."</p></div>";
   }
 
-  //Lets put the artist data information here
-  function query($id){
-    $this->values = array (
-      "name"=>"LeBrun",
-      "info"=>"Élisabeth Vigée-Lebrun, in full Marie-Louise-Élisabeth Vigée-Lebrun, Lebrun also spelled LeBrun or Le Brun, (born April 16, 1755, Paris, France—died March 30, 1842, Paris), French painter, one of the most successful women artists (unusually so for her time), particularly noted for her portraits of women."
-    );
+  static function getAllArtists(){
+      $sql = "SELECT artist_id, artist_fullName
+              FROM artist
+              ORDER BY artist_fullName ASC";
+      $conn = connectDatabase();
+      $result = $conn->query($sql);
+
+      if ($result->num_rows > 0){
+        $allArtists = array();
+        while ($row = $result->fetch_assoc()){
+          $allArtists[] = $row;
+        }
+        return $allArtists;
+      }
   }
+
+  //Lets put the artist data information here, this is going to grab a single artist details
+  function query($id){
+    $sql = "SELECT *
+            FROM artist
+            WHERE artist_id = $id";
+
+    $conn = connectDatabase();
+    $result = $conn->query($sql);
+
+    $this->values = $result->fetch_assoc();
+  }
+
   function update(){
-    echo "Here is the update";
+    $sql = "UPDATE artist
+            SET ?, ?, ?, ?, ?, ?, ? #These are just placeholders for now
+            WHERE {$this->values['artist_id']}";
   }
   function createNew(){
-    echo "Here is something new";
+    $sql = "INSERT INTO artist (artist_fullName, artist_desc)
+            VALUES ({$this->values['artist_fullName']}, {$this->values['artist_desc']})";
+    $conn = connectDatabase();
+    $result = $conn->query($sql);
+    if (!$result){
+      echo "Query failed";
+    } else {
+      echo "Query successful";
+    }
+
   }
   function deleteAbstract(){
-    echo "Something got deleted";
+    $sql = "DELETE FROM artist
+            WHERE ?"; #Leave this alone until we know for sure what we are deleting
+    $conn = connectDatabase();
+    $result = $conn->query($sql);
   }
 }
 
 
+
+
+
+
+
 class Artwork extends data {
   function getTitle(){
-    return "LeBrun";
+    return $this->values["artwork_name"];
   }
 
-  function getBody(){
+  static function getAllArtwork(){
+      $sql = "SELECT artwork_id, artwork_name
+              FROM artwork
+              ORDER BY artwork_name ASC";
+      $conn = connectDatabase();
+      $result = $conn->query($sql);
+
+      if ($result->num_rows > 0){
+        $allArtwork = array();
+        while ($row = $result->fetch_assoc()){
+          $allArtwork[] = $row;
+        }
+        return $allArtwork;
+      }
+  }
+
+  function getBody(){ #Change array and name to something to reflect in the databse
     $relatedArt = array(
-        /* Simple Approach: artId => ArtworkName
-         * Complex Approach: artID => array-of-data
-         */
         293 => array(
             'name'  =>'Still Life with Flowers in a Glass Vase',
             'artist'=>'Lebrun',
@@ -70,16 +123,7 @@ class Artwork extends data {
     );
     $relatedArtwork = '';
     foreach ($relatedArt as $artID => $artInfo) {
-        /*
-              <div class="relatedArt">
-                  <figure><img src="artwork/small/849.jpg" alt="Milkmaid" title="Milkmaid">
-                      <figcaption>
-                          <p><a href="#849">Milkmaid</a></p>
-                      </figcaption>
-                  </figure>
-                  <div class="actions"><a href="#">View</a><a href="#">Wish</a><a href="#">Cart</a></div>
-              </div>
-        */
+
         $relatedArtwork .= '<div class="relatedArt">'.
             '<figure><img src="artwork/small/'.$artID.'.jpg" alt="'.$artInfo['name'].'" title="'.$artInfo['name'].'">'.
             '<figcaption>'.
@@ -90,6 +134,9 @@ class Artwork extends data {
             '</div>';
     }
 
+
+
+    #$artist = new artist($this->values["artwork_artist"]);
 
     return '
 
@@ -143,12 +190,43 @@ class Artwork extends data {
 }
 
   //Lets put the artist data information here
-  function query($id){}
-  function update(){}
-  function createNew(){}
-  function deleteAbstract(){}
+  function query($id){
+    $sql = "SELECT *
+            FROM artwork
+            WHERE artwork_id = $id";
+
+            $conn = connectDatabase();
+            $result = $conn->query($sql);
+  }
+
+  function update(){
+    $sql = "UPDATE artwork
+            SET ?, ?, ?, ?
+            WHERE {$this->values['artwork_id']}";
+
+            $conn = connectDatabase();
+            $result = $conn->query($sql);
+  }
+
+  function createNew(){
+    $sql = "INSERT INTO artwork (artwork_name, artwork_reprintPrice, artwork_desc)
+            VALUES ({$this->values['artwork_name']}, {$this->values['artwork_reprintPrice']}, {$this->values['artwork_desc']})";
+
+            $conn = connectDatabase();
+            $result = $conn->query($sql);
+  }
+  function deleteAbstract(){
+    $sql = "DELETE FROM artwork
+            WHERE ?";
+
+            $conn = connectDatabase();
+            $result = $conn->query($sql);
+  }
 
 
-}
+
+
+    }
+
 
  ?>

@@ -1,8 +1,5 @@
 <?php
 
-
-//To use these abstract features it needs to be extenede via another class, so view next Comment. this abstract function requires us to extend it in order to use it. If im correct on this
-//class create extends data {}
 abstract class data {
 
 private $id;
@@ -19,9 +16,6 @@ private $id;
 
 
   public function delete(){}
-
-
-
 
   abstract public function query($id); //This is how ill get information from the database
 

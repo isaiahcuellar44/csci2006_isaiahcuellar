@@ -11,4 +11,26 @@ function home(){
   </div>";
 }
 
+
+function processArtists(){
+  $allArtists = Artist::getAllArtists();
+  $navStr = '<h1>Artists</h1><ul>';
+  foreach ($allArtists as $linkInfo) {
+      $navStr .= '<li><a href="?pg=artists&artist_id='.$linkInfo['artist_id'].'">'.$linkInfo['artist_fullName'].'</a></li>';
+  }
+  $navStr .= "</ul>";
+  return $navStr;
+}
+
+/*function processArtwork(){
+  $allArtwork = Artwork::getAllArtwork();
+  $navStr = '<h1>Artwork</h1><ul>';
+  foreach ($allArtwork as $linkInfo){
+    $navStr .= '';
+  }
+}
+*/
+#Here we are going to process the href but am i processing a single one? Or evvery painting?
+
+
 ?>

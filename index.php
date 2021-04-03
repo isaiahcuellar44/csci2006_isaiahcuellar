@@ -1,10 +1,13 @@
 <?php
 //This is our main to output the page
-//include "util.php"; we do include once because every time tht page is loaded it will load once
 include_once "account.php";
 include_once "artwork.php";
 include_once "aboutUs.php";
 include_once "Class.php";
+include_once "config.php"; #I can move this into a util.php after this is done
+
+connectDatabase();
+
 
 
 $header = printHeader();
@@ -13,15 +16,33 @@ $title = "";
 $body = "";
 
 switch ($_GET["pg"]){
+  case "signIn":
+    $body = signIn();
+    break;
+  case "signUp":
+    $body = signUp();
+    break;
+  case "logout":
+    $body = logout();
+    break;
   case "account":
     $body = accountDetails();
     break;
+  case "returns":
+    $body = returns();
+    break;
+  case "premium":
+    $body = premium();
+    break;
   case "artworks":
     //See if the query string has an artwork ID
-    $artworkID = 5;
-    $test = new Artwork($artworkID);
-    $title = $test->getTitle();//This does the HTML conversion
-    $body = $test->getBody();
+    #if (isset($_GET['artwork_id']))
+
+
+    $artworkID = 1;
+    $artwork1 = new Artwork($artworkID);
+    $title = $artwork1->getTitle();//This does the HTML conversion
+    $body = $artwork1->getBody();
     break;
 //Okay this is how im suppose to go about this i think
   case "home":
@@ -34,14 +55,16 @@ switch ($_GET["pg"]){
     break;
     default:
     case "artists":
-      //See if the query string has an artwork ID
-      $artistID = 1000000;
-      $test = new Artist($artistID);
-      $title = $test->getTitle();//This does the HTML conversion
-      $body = $test->getBody();
+      if (isset($_GET['artist_id'])){
+        $artist1 = new Artist($_GET['artist_id']);
+        $title = $artist1->getTitle();//This does the HTML conversion
+        $body = $artist1->getBody();
+      } else {
+        $title = "Artists";
+        $body = processArtists();
+      }
       break;
 }
-
 
 
  echo "<!DOCTYPE html>".

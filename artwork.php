@@ -5,15 +5,42 @@ include_once "account.php";
 
 function printFooter(){
   return '<footer>
-            <p>All images are copyright to their owners. This is just a hypothetical site ©2020 Copyright Art Store</p>
+            <p>All images are copyright to their owners. This is just a hypothetical site ©2020 Copyright</p>
           </footer>';
 };
 
 function printHeader(){
+  /*  So this is where we could put that conditional
+  if ($_SESSION['user'] = true){
   $firstNav = array(
     array ('name' => 'My account', 'link' => "?pg=account"),
     array ('name' => 'Wish List', 'link' => "#"),
     array ('name' => 'Shopping Cart', 'link' => "#"),
+    array ('name' => 'Returns?', 'link' => "?pg=returns"),
+    array ('name' => 'Premium', 'link' => "?pg=premium"),
+    array ('name' => 'Logout', 'link' => "?pg=logout")
+  );
+} else {
+$firstNav = array(
+  array ('name' => 'My account', 'link' => "?pg=account"),
+  array ('name' => 'Wish List', 'link' => "#"),
+  array ('name' => 'Shopping Cart', 'link' => "#"),
+  array ('name' => 'Returns?', 'link' => "?pg=returns"),
+  array ('name' => 'Premium', 'link' => "?pg=premium"),
+  array ('name' => 'Sign-In', 'link' => "?pg=signIn"),
+  array ('name' => 'Sign-Up', 'link' => "?pg=signUp")
+);
+}
+  */
+  $firstNav = array(
+    array ('name' => 'My account', 'link' => "?pg=account"),
+    array ('name' => 'Wish List', 'link' => "#"),
+    array ('name' => 'Shopping Cart', 'link' => "#"),
+    array ('name' => 'Returns?', 'link' => "?pg=returns"),
+    array ('name' => 'Premium', 'link' => "?pg=premium"),
+    array ('name' => 'Sign-In', 'link' => "?pg=signIn"),
+    array ('name' => 'Sign-Up', 'link' => "?pg=signUp"),
+    array ('name' => 'Logout', 'link' => "?pg=logout")
   );
 
   $navStr = '<ul>';

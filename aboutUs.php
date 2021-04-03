@@ -11,6 +11,7 @@ function home(){
   </div>";
 }
 
+
 function processArtists(){
   $allArtists = Artist::getAllArtists();
   $navStr = '<h1>Artists</h1><ul>';
@@ -29,7 +30,7 @@ function processArtists(){
   }
 }
 */
-#Here we are going to process the href but am i processing a single one? Or evvery painting? 
+#Here we are going to process the href but am i processing a single one? Or evvery painting?
 
 
 ?>

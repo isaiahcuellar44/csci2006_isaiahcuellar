@@ -16,6 +16,15 @@ $title = "";
 $body = "";
 
 switch ($_GET["pg"]){
+  case "signIn":
+    $body = signIn();
+    break;
+  case "signUp":
+    $body = signUp();
+    break;
+  case "logout":
+    $body = logout();
+    break;
   case "account":
     $body = accountDetails();
     break;

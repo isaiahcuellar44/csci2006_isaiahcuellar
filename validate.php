@@ -26,27 +26,34 @@ if (isset($_GET["submitSignIn"])){
   $thisPass = $_GET["password"];
   if ($thisUser == $currentUser && $thisPass == $curerntPassword){
     setcookie('user', $thisUser, time()+60+60+24);
-    $_SESSION['user'] = $thisUser;
-    header("Location: http://127.0.0.1/project/index.php?pg=home"); #Why isnt it force directing? I think because i didn't set the aciton in the form to validate
+    $_SESSION['loggedIn'] = $thisUser;
+    header("Location: http://127.0.0.1/project/index.php?pg=home");
     echo "You have signed in!";
   } else {
-    echo "Username already exists."
+    echo "Username already exists.";
   }
 } else {
   header("Location: http://127.0.0.1/project/index.php?pg=home");
 }
 
-
+#To validate the sign in 
+$username_err = '';
+$username = $_POST['username'];
+if(empty($_GET['submitSignIn'])){
+  $username_err = "Please enter your username";
+} else {
+  #Nothing
+}
 
 if (isset($_GET["newUser"])){
   $thisUser = $_GET["newUser"];
   $thisPass = $_GET["newPass"];
-  if ($thisUser == $currentUser){
-    return "This username already exists, please try again."
+  if ($thisUser != $currentUser){
+    return "This username already exists, please try again.";
     header("Location: index.php");
   } else {
     setcookie('username', $thisUser, time()+60+60+24);
-    $_SESSION['user'] = $thisUser;
+    $_SESSION['loggedIn'] = $thisUser;
     header ("Location: http://127.0.0.1/project/index.php?pg=home"); #This should just return them to the home page but we would need to indicate who tht use is
     #We could edit the navigation bar or something above it to indicate who is here or not
   }

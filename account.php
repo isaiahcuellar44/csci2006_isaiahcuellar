@@ -27,21 +27,15 @@ function accountDetails(){
 
 function returns(){
   return <<<__HTML__
-                <div class = "returns">
                   <form method="POST" action="">
-                    <label for="username">Username: </label>
-                    <input type="text" name="userName"><br>
-
-                    <label for ="ordernumber">Order Number: </label>
-                    <input type="text" name="orderNumber"><br>
-
+                    Username: <input type="text" name="userName"><br>
+                    Order Number: <input type="text" name="orderNumber"><br>
                     <input type="button" value="Submit">
                   </form>
-                </div>
         __HTML__;
 }
 
-function premium(){
+function premium(){ #With this we should also have a switch when the user is already signed in it will only ask two things of username and password, otherwise it shouldn't be displayed at all
   return <<<__HTML__
                 <div class = "premium">
                   <form method="POST" action="">
@@ -70,23 +64,25 @@ function logout(){
 
 function signIn(){
   session_start();
+  # value="<?php echo htmlentities($username)" we would want something like this to display in afte the user inputs data
   return <<<__HTML__
   <form method="POST" action="validate.php">
     Enter a username: <input type="text" name="username"><br>
-    Enter your passord: <input type="password" name="password"><br>
+    Enter your passord: <input type="password" name="password" minlength="8" required><br>
     <input type="submit" name="submitSignIn" value="submit">
   </form>
   __HTML__;
 }
 
-#In this form(s) lets make sure when the user mistypes information and its not valid, lets make sure the input is left there 
+#In this form(s) lets make sure when the user mistypes information and its not valid, lets make sure the input is left there
 function signUp(){
+  session_start();
   return <<<__HTML___
   <form method="POST" action="">
-    Enter a username: <input type="text" name="newUser"><br>
-    Enter a password: <input type="password" name="newPass"><br>
-    Enter your full name: <input type="text" name="newFullName"><br>
-    Enter your addres: <input type="text" name="newAddress"><br>
+    Enter a username: <input type="text" name="newUser" minlength="6" required><br>
+    Enter a password: <input type="password" name="newPass" minlength="8" required><br>
+    Enter your full name: <input type="text" name="newFullName" required><br>
+    Enter your street address: <input type="text" name="newAddress" required><br>
     <input type="submit" name="newUser" value="Confirm">
   </form>
 

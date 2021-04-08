@@ -75,5 +75,4 @@ switch ($_GET["pg"]){
            "<link rel=\"stylesheet\" href=\"_aux/default.css\">".
          "</head>".
          "<body>{$header}{$body}{$footer}</body></html>";
-//Okay so i think this is where i need to put in the work to choose between the artists
 ?>

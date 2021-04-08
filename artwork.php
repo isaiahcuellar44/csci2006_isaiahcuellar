@@ -11,7 +11,7 @@ function printFooter(){
 
 function printHeader(){
 
-  if ($_SESSION['user'] = true){
+  if ($_SESSION['loggedIn'] == true){
   $firstNav = array(
     array ('name' => 'My account', 'link' => "?pg=account"),
     array ('name' => 'Wish List', 'link' => "#"),
